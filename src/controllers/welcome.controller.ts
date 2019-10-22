@@ -1,15 +1,13 @@
 
 import { Response, Request} from 'express';
 
-class WelcomeController {
+export class WelcomeController {
 
     /**
      * GET /
      * Return hello word
      */
-    static getWelcome = async (req: Request, res: Response) => {
+    getWelcome = async (req: Request, res: Response) => {
         res.send('Welcome!');
     };
 }
-
-export default WelcomeController;

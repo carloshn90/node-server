@@ -1,4 +1,5 @@
 
 export default {
-    jwtSecret: 'ppxpcEHrHD'
+    jwtSecret: 'ppxpcEHrHD',
+    mongoDbConnection: 'mongodb://localhost:27017/some-mongo'
 };

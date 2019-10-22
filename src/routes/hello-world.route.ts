@@ -1,11 +1,24 @@
 import {Router} from 'express';
 
-import helloWorldController from '../controllers/hello-world.controller';
+import HelloWorldController from '../controllers/hello-world.controller';
 
+export class HelloWorldRoute {
 
-const router = Router();
+    router: Router;
+    helloWorldController: HelloWorldController;
 
-// Say Hello world
-router.get('/', helloWorldController.getHelloWorld);
+    constructor() {
+        this.router = Router();
+        this.helloWorldController = new HelloWorldController();
+        this.setRoutes();
+    }
 
-export default router;
+    public getRouter(): Router {
+        return this.router;
+    }
+
+    private setRoutes(): void {
+        // Say Hello world
+        this.router.get('/', this.helloWorldController.getHelloWorld);
+    }
+}

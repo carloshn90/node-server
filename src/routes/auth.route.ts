@@ -1,15 +1,30 @@
 import { Router } from 'express';
-import {checkJwt} from '../middlewares/check-jwt.middleware';
+import { checkJwt } from '../middlewares/check-jwt.middleware';
 
-import AuthController from '../controllers/auth.controller';
-import {checkRole} from '../middlewares/check-role.middleware';
+import { checkRole } from '../middlewares/check-role.middleware';
+import { AuthController } from '../controllers/auth.controller';
 
-const router = Router();
+export class AuthRoute {
 
-// Login route
-router.post('/login', AuthController.login);
+    router: Router;
+    authController: AuthController;
 
-// Change my password
-router.post('/change-password', [checkJwt, checkRole(['ADMIN'])], AuthController.changePassword);
+    constructor() {
+        this.router = Router();
+        this.authController = new AuthController();
+        this.setRoutes();
+    }
 
-export default router;
+    public getRouter(): Router {
+        return this.router;
+    }
+
+    private setRoutes(): void {
+
+        // Login route
+        this.router.post('/login', this.authController.login);
+
+        // Change my password
+        this.router.post('/change-password', [checkJwt, checkRole(['ADMIN'])], this.authController.changePassword);
+    }
+}

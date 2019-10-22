@@ -1,20 +1,52 @@
 import express from 'express';
 import cors = require('cors');
 import helmet = require('helmet');
+import mongoose = require('mongoose');
 
-import appRoutes from './routes/app.route';
+import {Application} from 'express';
+import {Connection} from 'mongoose';
+import config from './config/config';
+import {AppRoute} from './routes/app.route';
 
-// Create Express server
-const app = express();
+export class App {
 
-// Express configuration
-app.use(cors());
-app.use(helmet());
-app.set('port', process.env.PORT || 3000);
+    app: Application;
+    appRoute: AppRoute;
 
-/**
- * App routes
- */
-app.use('/', appRoutes);
+    constructor() {
+        this.app = express();
+        this.appRoute = new AppRoute();
+        this.setConfig();
+        this.setRoutes();
+    }
 
-export default app;
+    getApp(): Application {
+        return this.app;
+    }
+
+    /**
+     * Configure application
+     */
+    private setConfig(): void {
+
+        // Express configuration
+        this.app.use(cors());
+        this.app.use(helmet());
+        this.app.set('port', process.env.PORT || 3000);
+
+        // Mongoose connection
+        mongoose.connect(config.mongoDbConnection, {useNewUrlParser: true});
+        const connection: Connection = mongoose.connection;
+        connection.on('error', console.error.bind(console, 'connection error:'));
+        connection.once('open', function () { console.log('The connection with the database is open'); });
+    }
+
+    /**
+     * App routes
+     */
+    private setRoutes(): void {
+        this.app.use('/', this.appRoute.getRouter());
+    }
+}
+
+export default new App().getApp();

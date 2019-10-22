@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import {TokenInterface} from './token.interface';
+import { IToken } from '../interfaces/token.interface';
 import * as _ from 'lodash';
 
 export const checkRole = (roles: Array<string>) => {
@@ -17,7 +17,7 @@ export const checkRole = (roles: Array<string>) => {
         }
 
 //        Get the user ID from previous middleware
-        const jwtToken = res.locals.jwtPayload as TokenInterface;
+        const jwtToken = res.locals.jwtPayload as IToken;
         const jwtRoles: Array<string> = _.isNil(jwtToken.roles) ? [] : jwtToken.roles;
 
 //        Check if array of authorized roles includes the user's role
