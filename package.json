@@ -9,9 +9,9 @@
     "prod": "tsc && node ./dist/server.js",
     "serve": "node dist/server.js",
     "tsc": "tsc",
-    "int-test": "mocha -r ts-node/register test/int/**/*.spec.ts",
+    "int-test": "mocha -r ts-node/register test/int/**/*.spec.ts --exit",
     "unit-test": "mocha -r ts-node/register test/unit/**/*.spec.ts",
-    "test": "mocha -r ts-node/register test/**/*.spec.ts",
+    "test": "mocha -r ts-node/register test/**/*.spec.ts --exit",
     "coverage": "nyc npm run test"
   },
   "author": "Carlos Hernandez Navarro",
@@ -31,7 +31,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.7.5",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.3",

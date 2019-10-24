@@ -2,9 +2,10 @@
 import { Response, Request} from 'express';
 import {UserService} from '../services/user.service';
 import {IUser} from '../models/user.model';
+import {LOGGER} from '../config/logger.config';
 
-class HelloWorldController {
-
+export class HelloWorldController {
+   logger = LOGGER.child({ class: 'server' });
    userService: UserService;
 
    constructor() {
@@ -21,10 +22,11 @@ class HelloWorldController {
 
       await promiseUserArray.then((userArray: Array<IUser>) => {
          res.send(userArray);
+      }).catch((error: Error) => {
+         this.logger.error(error.message);
+         res.status(404).send('Error trying to find the users: ' + error.message);
       });
    };
 
 }
-
-export default HelloWorldController;
 

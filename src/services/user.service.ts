@@ -12,6 +12,8 @@ export class UserService {
                 } else {
                     resolve(userModelArray as Array<IUser>);
                 }
+            }).catch((error: Error) => {
+                reject(error);
             });
 
         });

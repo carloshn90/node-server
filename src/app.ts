@@ -4,11 +4,12 @@ import helmet = require('helmet');
 import mongoose = require('mongoose');
 
 import {Application} from 'express';
-import {Connection} from 'mongoose';
 import config from './config/config';
 import {AppRoute} from './routes/app.route';
+import {LOGGER} from './config/logger.config';
 
 export class App {
+    logger = LOGGER.child({ class: 'App' });
 
     app: Application;
     appRoute: AppRoute;
@@ -35,10 +36,10 @@ export class App {
         this.app.set('port', process.env.PORT || 3000);
 
         // Mongoose connection
-        mongoose.connect(config.mongoDbConnection, {useNewUrlParser: true});
-        const connection: Connection = mongoose.connection;
-        connection.on('error', console.error.bind(console, 'connection error:'));
-        connection.once('open', function () { console.log('The connection with the database is open'); });
+        mongoose.connect(config.mongoDbConnection, {useNewUrlParser: true})
+            .catch((error: Error) => {
+                this.logger.error(error.message);
+            });
     }
 
     /**
