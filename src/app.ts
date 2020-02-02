@@ -2,6 +2,7 @@ import express from 'express';
 import cors = require('cors');
 import helmet = require('helmet');
 import mongoose = require('mongoose');
+import bodyParser = require('body-parser');
 
 import {Application} from 'express';
 import config from './config/config';
@@ -33,6 +34,7 @@ export class App {
         // Express configuration
         this.app.use(cors());
         this.app.use(helmet());
+        this.app.use(bodyParser.json());
         this.app.set('port', process.env.PORT || 3000);
 
         // Mongoose connection

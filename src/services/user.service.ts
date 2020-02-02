@@ -1,23 +1,35 @@
-import UserModel, {IUser} from '../models/user.model';
+import {IUser} from '../models/user.model';
+import {LOGGER} from '../config/logger.config';
+import {JwtService} from './jwt.service';
+import {UserDao} from '../dao/user.dao';
+import * as _ from 'lodash';
+import {ApiErrorModel} from '../models/api.error.model';
 
 export class UserService {
 
-    findAllUser(): Promise<Array<IUser>> {
+    logger = LOGGER.child({ class: 'UserService' });
 
-        const userPromise: Promise<Array<IUser>> = new Promise((resolve, reject) => {
+    jwtService: JwtService;
+    userDao: UserDao;
 
-            UserModel.find({}).exec(function(err, userModelArray) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(userModelArray as Array<IUser>);
-                }
-            }).catch((error: Error) => {
-                reject(error);
-            });
+    constructor() {
+        this.jwtService = new JwtService();
+        this.userDao = new UserDao();
+    }
 
-        });
+    async login(email: string, passwordHash: string): Promise<string> {
 
-        return userPromise;
+        const userModel: IUser = await this.userDao.findUserByEmail(email, passwordHash);
+
+        if (_.isNil(userModel)) {
+            this.logger.error('The user is not registered');
+            throw new ApiErrorModel(403, 'Forbidden: The user is not registered');
+        }
+
+        return this.jwtService.createJwt('1234', userModel.firstName, userModel.roles);
+    }
+
+    async findAll(): Promise<Array<IUser>> {
+        return this.userDao.findAll();
     }
 }

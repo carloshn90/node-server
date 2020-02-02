@@ -1,19 +1,31 @@
 
 import { Request, Response } from 'express';
-import * as jwt from 'jsonwebtoken';
-import config from '../config/config';
+import {LOGGER} from '../config/logger.config';
+import {validationResult} from 'express-validator';
+import {UserService} from '../services/user.service';
+import {ApiErrorModel} from '../models/api.error.model';
 
 export class AuthController {
 
+    logger = LOGGER.child({ class: 'AuthController' });
+    userService: UserService;
+
+    constructor() {
+        this.userService = new UserService();
+    }
+
     login = async (req: Request, res: Response) => {
 
-        // Sing JWT, valid for 1 hour
-        const jwtToken: string = jwt.sign(
-            {userId: '1234', username: 'carlos', roles: ['ADMIN']},
-            config.jwtSecret,
-            { expiresIn: '1h'}
-        );
-        res.send(jwtToken);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            this.logger.error('Validation errors: ', errors.array());
+            res.status(422).json({ errors: errors.array() });
+        } else {
+            this.userService
+                .login(req.body.email, req.body.passwordHash)
+                .then((jwtToken: string) => res.send(jwtToken))
+                .catch((error: ApiErrorModel) => res.status(error.status).json(error));
+        }
     };
 
     changePassword = async (req: Request, res: Response) => {

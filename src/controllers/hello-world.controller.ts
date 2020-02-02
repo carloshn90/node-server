@@ -18,7 +18,7 @@ export class HelloWorldController {
     */
    getHelloWorld = async (req: Request, res: Response) => {
 
-      const promiseUserArray: Promise<Array<IUser>> = this.userService.findAllUser();
+      const promiseUserArray: Promise<Array<IUser>> = this.userService.findAll();
 
       await promiseUserArray.then((userArray: Array<IUser>) => {
          res.send(userArray);
