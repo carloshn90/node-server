@@ -9,7 +9,7 @@ chai.use(sinonChai);
 
 describe('Welcome controller unit test', () => {
 
-    it ('should return Welcome!', async() => {
+    it ('should return Welcome!', async () => {
         const req: Request = mockReq();
         const res: Response = mockRes();
         const welcomeController: WelcomeController = new WelcomeController();

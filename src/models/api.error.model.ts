@@ -1,12 +1,12 @@
 
-export class ApiErrorModel {
+export class ApiErrorModel extends Error {
 
     private _status: number;
-    private _message: string;
 
     constructor(status: number, message: string) {
+        super(message);
         this._status = status;
-        this._message = message;
+        Error.captureStackTrace(this, this.constructor);
     }
 
     get status(): number {
@@ -15,13 +15,5 @@ export class ApiErrorModel {
 
     set status(value: number) {
         this._status = value;
-    }
-
-    get message(): string {
-        return this._message;
-    }
-
-    set message(value: string) {
-        this._message = value;
     }
 }

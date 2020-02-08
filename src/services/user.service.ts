@@ -1,7 +1,7 @@
 import {IUser} from '../models/user.model';
 import {LOGGER} from '../config/logger.config';
 import {JwtService} from './jwt.service';
-import {UserDao} from '../dao/user.dao';
+import {UserDao} from '../daos/user.dao';
 import * as _ from 'lodash';
 import {ApiErrorModel} from '../models/api.error.model';
 
