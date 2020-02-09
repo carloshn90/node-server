@@ -1,9 +1,9 @@
 
 import { Request, Response } from 'express';
-import {LOGGER} from '../config/logger.config';
-import {validationResult} from 'express-validator';
-import {UserService} from '../services/user.service';
-import {ApiErrorModel} from '../models/api.error.model';
+import { LOGGER } from '../configs/logger.config';
+import { validationResult } from 'express-validator';
+import { UserService } from '../services/user.service';
+import { ApiErrorModel } from '../models/api.error.model';
 
 export class AuthController {
 

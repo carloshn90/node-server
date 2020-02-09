@@ -1,8 +1,8 @@
 
-import { Response, Request} from 'express';
-import {UserService} from '../services/user.service';
-import {LOGGER} from '../config/logger.config';
-import {IUser} from '../interfaces/user.interface';
+import { Response, Request } from 'express';
+import { UserService } from '../services/user.service';
+import { LOGGER } from '../configs/logger.config';
+import { IUser } from '../interfaces/user.interface';
 
 export class HelloWorldController {
    logger = LOGGER.child({ class: 'server' });

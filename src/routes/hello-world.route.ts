@@ -1,5 +1,5 @@
-import {Router} from 'express';
-import {HelloWorldController} from '../controllers/hello-world.controller';
+import { Router } from 'express';
+import { HelloWorldController } from '../controllers/hello-world.controller';
 
 export class HelloWorldRoute {
 

@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import config from '../config/config';
+import config from '../configs/config';
 
 export class JwtService {
 

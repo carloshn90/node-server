@@ -2,8 +2,8 @@ import {Response, Request, NextFunction} from 'express';
 import { expect } from 'chai';
 import * as chai from 'chai';
 import sinonChai = require('sinon-chai');
-import {mockReq, mockRes} from 'sinon-express-mock';
-import {checkRole} from '../../../src/middlewares/check-role.middleware';
+import { mockReq, mockRes } from 'sinon-express-mock';
+import { checkRole } from '../../../src/middlewares/check-role.middleware';
 
 chai.use(sinonChai);
 

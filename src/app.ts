@@ -4,10 +4,10 @@ import helmet = require('helmet');
 import mongoose = require('mongoose');
 import bodyParser = require('body-parser');
 
-import {Application} from 'express';
-import config from './config/config';
-import {AppRoute} from './routes/app.route';
-import {LOGGER} from './config/logger.config';
+import { Application } from 'express';
+import config from './configs/config';
+import { AppRoute } from './routes/app.route';
+import { LOGGER } from './configs/logger.config';
 
 export class App {
     logger = LOGGER.child({ class: 'App' });

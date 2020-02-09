@@ -1,12 +1,12 @@
-import {Response, Request, NextFunction} from 'express';
+import { Response, Request, NextFunction } from 'express';
 import { expect } from 'chai';
 import * as chai from 'chai';
 import sinon = require('sinon');
 import sinonChai = require('sinon-chai');
-import {mockReq, mockRes} from 'sinon-express-mock';
-import {checkJwt} from '../../../src/middlewares/check-jwt.middleware';
+import { mockReq, mockRes } from 'sinon-express-mock';
+import { checkJwt } from '../../../src/middlewares/check-jwt.middleware';
 import * as jwt from 'jsonwebtoken';
-import config from '../../../src/config/config';
+import config from '../../../src/configs/config';
 
 chai.use(sinonChai);
 

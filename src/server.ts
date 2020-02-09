@@ -1,5 +1,5 @@
 import app from './app';
-import {LOGGER} from './config/logger.config';
+import { LOGGER } from './configs/logger.config';
 
 const logger = LOGGER.child({ class: 'server' });
 

@@ -1,9 +1,9 @@
-import {LOGGER} from '../config/logger.config';
+import { LOGGER } from '../configs/logger.config';
 import UserModel from '../models/user.model';
-import {ApiErrorModel} from '../models/api.error.model';
-import {IUser} from '../interfaces/user.interface';
+import { ApiErrorModel } from '../models/api.error.model';
+import { IUser } from '../interfaces/user.interface';
 
-export class UserDao {
+export class UserRepository {
 
     logger = LOGGER.child({ class: 'UserDao' });
 

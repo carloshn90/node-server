@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 import * as _ from 'lodash';
 import { IToken } from '../interfaces/token.interface';
-import config from '../config/config';
+import config from '../configs/config';
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
 

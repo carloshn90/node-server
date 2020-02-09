@@ -1,20 +1,20 @@
-import {IUser} from '../interfaces/user.interface';
-import {LOGGER} from '../config/logger.config';
-import {JwtService} from './jwt.service';
-import {UserDao} from '../daos/user.dao';
+import { IUser } from '../interfaces/user.interface';
+import { LOGGER } from '../configs/logger.config';
+import { JwtService } from './jwt.service';
+import { UserRepository } from '../repositories/user.repository';
 import * as _ from 'lodash';
-import {ApiErrorModel} from '../models/api.error.model';
+import { ApiErrorModel } from '../models/api.error.model';
 
 export class UserService {
 
     logger = LOGGER.child({ class: 'UserService' });
 
     jwtService: JwtService;
-    userDao: UserDao;
+    userDao: UserRepository;
 
     constructor() {
         this.jwtService = new JwtService();
-        this.userDao = new UserDao();
+        this.userDao = new UserRepository();
     }
 
     async login(email: string, passwordHash: string): Promise<string> {

@@ -1,4 +1,4 @@
-import {format, transports} from 'winston';
+import { format, transports } from 'winston';
 import winston = require('winston');
 
 export const LOGGER = winston.createLogger({

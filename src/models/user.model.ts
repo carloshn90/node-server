@@ -1,6 +1,6 @@
-import {Document, Schema} from 'mongoose';
+import { Document, Schema } from 'mongoose';
 import * as mongoose from 'mongoose';
-import {IUser} from '../interfaces/user.interface';
+import { IUser } from '../interfaces/user.interface';
 
 export interface IUserDocument extends IUser, Document{
     _id: mongoose.Types.ObjectId;

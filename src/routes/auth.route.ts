@@ -3,7 +3,7 @@ import { checkJwt } from '../middlewares/check-jwt.middleware';
 
 import { checkRole } from '../middlewares/check-role.middleware';
 import { AuthController } from '../controllers/auth.controller';
-import {check} from 'express-validator';
+import { check } from 'express-validator';
 
 export class AuthRoute {
 
