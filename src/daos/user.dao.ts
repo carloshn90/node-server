@@ -1,6 +1,7 @@
 import {LOGGER} from '../config/logger.config';
-import UserModel, {IUser} from '../models/user.model';
+import UserModel from '../models/user.model';
 import {ApiErrorModel} from '../models/api.error.model';
+import {IUser} from '../interfaces/user.interface';
 
 export class UserDao {
 
@@ -9,7 +10,7 @@ export class UserDao {
     findAll(): Promise<Array<IUser>> {
 
         const userPromise: Promise<Array<IUser>> = UserModel
-            .find({}).exec().then((userModelArray) => {
+            .find({}).lean().exec().then((userModelArray) => {
                 return userModelArray as Array<IUser>;
             }, (error) => {
                 this.logger.error(error);
@@ -22,7 +23,7 @@ export class UserDao {
     findUserByEmail(email: string, passwordHash: string): Promise<IUser> {
 
         const userPromise: Promise<IUser> = UserModel
-            .findOne({email: email, password: passwordHash}).exec().then((userModel) => {
+            .findOne({email: email, password: passwordHash}).lean().exec().then((userModel) => {
                 return userModel as IUser;
             }, (error: Error) => {
                 this.logger.error(error);

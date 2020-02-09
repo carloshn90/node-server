@@ -1,4 +1,4 @@
-import {IUser} from '../models/user.model';
+import {IUser} from '../interfaces/user.interface';
 import {LOGGER} from '../config/logger.config';
 import {JwtService} from './jwt.service';
 import {UserDao} from '../daos/user.dao';
@@ -26,7 +26,7 @@ export class UserService {
             throw new ApiErrorModel(403, 'Forbidden: The user is not registered');
         }
 
-        return this.jwtService.createJwt('1234', userModel.firstName, userModel.roles);
+        return this.jwtService.createJwt(userModel._id.toHexString(), userModel.firstName, userModel.roles);
     }
 
     async findAll(): Promise<Array<IUser>> {

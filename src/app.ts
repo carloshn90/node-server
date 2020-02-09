@@ -41,6 +41,7 @@ export class App {
         mongoose.connect(config.mongoDbConnection, {useNewUrlParser: true})
             .catch((error: Error) => {
                 this.logger.error(error.message);
+                process.exit(1);
             });
     }
 
